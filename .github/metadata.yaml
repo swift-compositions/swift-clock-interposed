@@ -1,0 +1,10 @@
+description: "A process clock for Swift tests on Apple platforms: the machine's uptime, as every image of the process reads it, frozen and stepped from inside the process by dyld interposition."
+topics:
+  - compositions
+  - clock
+  - testing
+  - interposition
+homepage: "https://swift-institute.org"
+readme:
+  family: E
+platforms: apple
