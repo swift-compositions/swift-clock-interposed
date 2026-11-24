@@ -1,9 +1,9 @@
-import Synchronization
+import Lock
 
 extension Clock.Interposed {
     /// The pending sleeps and the clock they wait on, under one lock, so a sleep and an advance never miss each other.
     final class Sleepers: Sendable {
-        let state = Mutex(State())
+        let state = Lock(State())
     }
 }
 

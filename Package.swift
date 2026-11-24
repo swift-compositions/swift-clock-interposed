@@ -17,6 +17,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/swift-atoms/swift-clock.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-lock.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-rate.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-tagged.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-time.git", branch: "main"),
@@ -27,6 +28,7 @@ let package = Package(
             name: "Interposed Clock",
             dependencies: [
                 .product(name: "Clock Concurrency", package: "swift-clock"),
+                .product(name: "Lock", package: "swift-lock"),
                 .product(name: "Rate", package: "swift-rate"),
                 .product(name: "Tagged", package: "swift-tagged"),
                 .product(name: "Time", package: "swift-time"),
