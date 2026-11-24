@@ -11,7 +11,13 @@ enum Fixture {
         return url.path == "/" ? nil : url.deletingLastPathComponent()
     }
 
-    static var library: String? { products?.appending(path: "libInterposed Clock Interposition.dylib").path }
+    /// The interposition library: SwiftPM builds it as a dynamic library, Xcode as a framework.
+    static var library: String? {
+        guard let products else { return nil }
+        let name = "Interposed Clock Interposition"
+        let framework = products.appending(path: "PackageFrameworks/\(name).framework/\(name)").path
+        return FileManager.default.fileExists(atPath: framework) ? framework : products.appending(path: "lib\(name).dylib").path
+    }
 
     /// Runs the fixture and gives back its `key=value` lines, the values of a repeated key in order, with how it
     /// ended under `status`. A fixture still running after 90 seconds is ended, so a test fails and never hangs.
