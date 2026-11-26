@@ -1,6 +1,6 @@
 #if canImport(Darwin)
     import Foundation
-    import Interposed_Clock
+    import Clock_Interposed
 
     extension Fixture {
         /// What woke, in the order it ran, each with where the clock stood when it did.

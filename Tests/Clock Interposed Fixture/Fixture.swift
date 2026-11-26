@@ -1,6 +1,6 @@
 #if canImport(Darwin)
     import Darwin
-    import Interposed_Clock
+    import Clock_Interposed
     #if canImport(QuartzCore)
         import QuartzCore
     #endif

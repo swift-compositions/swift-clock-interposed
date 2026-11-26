@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "swift-interposed-clock",
+    name: "swift-clock-interposed",
     platforms: [
         .macOS(.v27),
         .iOS(.v27),
@@ -12,8 +12,8 @@ let package = Package(
         .visionOS(.v27),
     ],
     products: [
-        .library(name: "Interposed Clock", targets: ["Interposed Clock"]),
-        .library(name: "Interposed Clock Interposition", type: .dynamic, targets: ["Interposed Clock Interposition"]),
+        .library(name: "Clock Interposed", targets: ["Clock Interposed"]),
+        .library(name: "Clock Interposed Interposition", type: .dynamic, targets: ["Clock Interposed Interposition"]),
     ],
     dependencies: [
         .package(url: "https://github.com/swift-atoms/swift-clock.git", branch: "main"),
@@ -25,7 +25,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "Interposed Clock",
+            name: "Clock Interposed",
             dependencies: [
                 .product(name: "Clock Concurrency", package: "swift-clock"),
                 .product(name: "Lock", package: "swift-lock"),
@@ -34,18 +34,18 @@ let package = Package(
                 .product(name: "Time", package: "swift-time"),
             ]
         ),
-        .target(name: "Interposed Clock Interposition"),
+        .target(name: "Clock Interposed Interposition"),
         .executableTarget(
-            name: "Interposed Clock Fixture",
+            name: "Clock Interposed Fixture",
             dependencies: [
-                .target(name: "Interposed Clock")
+                .target(name: "Clock Interposed")
             ],
-            path: "Tests/Interposed Clock Fixture"
+            path: "Tests/Clock Interposed Fixture"
         ),
         .testTarget(
-            name: "Interposed Clock Tests",
+            name: "Clock Interposed Tests",
             dependencies: [
-                .target(name: "Interposed Clock Fixture"),
+                .target(name: "Clock Interposed Fixture"),
                 .product(name: "Test Apple", package: "swift-test-apple"),
             ]
         ),

@@ -14,7 +14,7 @@ enum Fixture {
     /// The interposition library: SwiftPM builds it as a dynamic library, Xcode as a framework.
     static var library: String? {
         guard let products else { return nil }
-        let name = "Interposed Clock Interposition"
+        let name = "Clock Interposed Interposition"
         let framework = products.appending(path: "PackageFrameworks/\(name).framework/\(name)").path
         return FileManager.default.fileExists(atPath: framework) ? framework : products.appending(path: "lib\(name).dylib").path
     }
@@ -24,7 +24,7 @@ enum Fixture {
     static func run(_ arguments: [String], inserting: Bool) -> [String: [String]] {
         guard let products, let library else { return [:] }
         let process = Process()
-        process.executableURL = products.appending(path: "Interposed Clock Fixture")
+        process.executableURL = products.appending(path: "Clock Interposed Fixture")
         process.arguments = arguments
         var environment = ProcessInfo.processInfo.environment
         environment["DYLD_INSERT_LIBRARIES"] = inserting ? library : nil

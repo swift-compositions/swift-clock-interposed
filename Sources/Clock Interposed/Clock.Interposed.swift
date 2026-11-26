@@ -6,7 +6,7 @@ extension Clock {
     /// The process's clock as every image of the process reads the machine's uptime, which this clock can freeze and
     /// then move only by `advance`, however long the wall clock runs.
     ///
-    /// It works through the `Interposed Clock Interposition` library, which must be in the process from launch: link
+    /// It works through the `Clock Interposed Interposition` library, which must be in the process from launch: link
     /// that product into the executable, or start the executable with `DYLD_INSERT_LIBRARIES` naming it. Every value
     /// is a handle on the one clock of the process. As a clock of Swift's own, `now` is where it stands and a sleep
     /// returns when an advance reaches its deadline, never by the wall clock.
