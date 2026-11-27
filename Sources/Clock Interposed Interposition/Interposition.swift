@@ -69,7 +69,7 @@
     /// Takes the process's clock off the machine's, at the instant the machine's clock reads now. Calling it again,
     /// from any thread, does nothing.
     @c(interposed_clock_freeze)
-    func freeze() {
+    public func freeze() {
         guard unsafe claim(&phase, from: 0, to: 1) else {
             while unsafe load(&phase) != 2 { sched_yield() }
             return
@@ -85,23 +85,23 @@
 
     /// 1 once the clock is frozen, 0 before.
     @c(interposed_clock_frozen)
-    func isFrozen() -> Int32 { frozen() ? 1 : 0 }
+    public func isFrozen() -> Int32 { frozen() ? 1 : 0 }
 
     /// Moves the frozen clock on by so many nanoseconds; before the freeze it does nothing.
     @c(interposed_clock_advance)
-    func advance(_ nanoseconds: UInt64) {
+    public func advance(_ nanoseconds: UInt64) {
         guard frozen() else { return }
         unsafe add(nanoseconds, &elapsed)
     }
 
     /// The nanoseconds the clock was moved on since it was frozen; 0 before.
     @c(interposed_clock_elapsed)
-    func moved() -> UInt64 { frozen() ? unsafe load(&elapsed) : 0 }
+    public func moved() -> UInt64 { frozen() ? unsafe load(&elapsed) : 0 }
 
     /// Makes the calling thread's next `mach_absolute_time` answer `UInt64.max` when, and only when, that call is
     /// routed through this library, so a caller learns whether its own calls are. One thread probes at a time.
     @c(interposed_clock_probe)
-    func probe() { unsafe store(UInt64(UInt(bitPattern: pthread_self())), &prober) }
+    public func probe() { unsafe store(UInt64(UInt(bitPattern: pthread_self())), &prober) }
 
     @c(interposed_clock_mach_absolute_time)
     func absolute() -> UInt64 {
